@@ -29,7 +29,7 @@ steps:
   inputs:
     command: 'pack'
     packagesToPack: '**/*.csproj'
-    versioningScheme: 'off'
+    versioningScheme: 'byBuildNumber'
     arguments: '--output $(Build.ArtifactStagingDirectory)'
 
 - task: NuGetCommand@2
