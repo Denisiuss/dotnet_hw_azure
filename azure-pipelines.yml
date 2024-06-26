@@ -31,3 +31,11 @@ steps:
     packagesToPack: '**/*.csproj'
     versioningScheme: 'off'
     arguments: '--output $(Build.ArtifactStagingDirectory)'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: '4fc719f4-420b-46dd-80c4-4d013603cf3d/a3086c74-7606-43de-bee6-e7dc5fbf9cda'
+    allowPackageConflicts: true    
