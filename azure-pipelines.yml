@@ -10,7 +10,9 @@ pool:
   name: default
 
 variables:
-  buildVersion: '1.0.$(rev:.r)'  
+  majorVersion: 1
+  minorVersion: 0
+  patchVersion: $[counter(variables['majorVersion'].variables['minorVersion'].variables['patchVersion'], 1)]
 
 steps:
 - task: UseDotNet@2
@@ -23,6 +25,11 @@ steps:
     command: 'restore'
     projects: '**/*.csproj'
 
+- script: |
+    echo "##vso[task.setvariable variable=buildNumber;]$BUILD_BUILDID"
+    echo "##vso[task.setvariable variable=version;]$(majorVersion).$(minorVersion).$(patchVersion)-$(Build.BuildId)"
+  displayName: 'Set Package Version'
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
@@ -32,9 +39,10 @@ steps:
   inputs:
     command: 'pack'
     packagesToPack: '**/*.csproj'
+    versioningScheme: 'off'
+    arguments: '--output $(Build.ArtifactStagingDirectory)'
+    displayName: 'Pack NuGet package'
     
-    arguments: '--output $(Build.ArtifactStagingDirectory) /p:PackageVersion=$(buildVersion)'
-
 - task: NuGetCommand@2
   inputs:
     command: 'push'
