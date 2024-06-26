@@ -32,7 +32,7 @@ steps:
   inputs:
     command: 'pack'
     packagesToPack: '**/*.csproj'
-    versioningScheme: 'byBuildNumber'
+    
     arguments: '--output $(Build.ArtifactStagingDirectory) /p:PackageVersion=$(buildVersion)'
 
 - task: NuGetCommand@2
