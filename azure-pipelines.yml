@@ -9,6 +9,9 @@ trigger:
 pool:
   name: default
 
+variables:
+  buildVersion: '1.0.$(Build.BuildId)'  
+
 steps:
 - task: UseDotNet@2
   inputs:
@@ -30,7 +33,7 @@ steps:
     command: 'pack'
     packagesToPack: '**/*.csproj'
     versioningScheme: 'byBuildNumber'
-    arguments: '--output $(Build.ArtifactStagingDirectory)'
+    arguments: '--output $(Build.ArtifactStagingDirectory) /p:PackageVersion=$(buildVersion)'
 
 - task: NuGetCommand@2
   inputs:
