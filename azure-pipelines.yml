@@ -19,13 +19,13 @@ steps:
   fetchDepth: 0
 
 - task: SonarCloudPrepare@2
-displayName: 'Prepare analysis configuration'
-inputs:
-  SonarCloud: 'Dev_inf'
-  organization: 'denis-vasilevsky'
-  scannerMode: 'MSBuild'
-  projectKey: 'vasilevski12_devops_infinity'
-  projectName: 'devops_infinity'
+  displayName: 'Prepare analysis configuration'
+  inputs:
+    SonarCloud: 'Dev_inf'
+    organization: 'denis-vasilevsky'
+    scannerMode: 'MSBuild'
+    projectKey: 'vasilevski12_devops_infinity'
+    projectName: 'devops_infinity'
 
 - task: UseDotNet@2
   inputs:
