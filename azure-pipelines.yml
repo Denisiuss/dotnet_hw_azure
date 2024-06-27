@@ -14,6 +14,7 @@ variables:
   majorVersion: 1
   minorVersion: 0
   patchVersion: $[counter(variables['majorVersion'].variables['minorVersion'].variables['patchVersion'], 1)]
+  BRANCH_NAME: $[replace(variables['Build.SourceBranch'], 'refs/heads/', '')]
 
 steps:
 - checkout: self
@@ -57,7 +58,7 @@ steps:
     command: 'pack'
     packagesToPack: '**/*.csproj'
     versioningScheme: 'off'
-    buildProperties: 'PackageIdPrefix=$(Build.SourceBranch)_$(majorVersion).$(minorVersion).$(patchVersion)-$(Build.BuildId)'
+    buildProperties: 'PackageIdPrefix=$(BRANCH_NAME)_$(majorVersion).$(minorVersion).$(patchVersion)-$(Build.BuildId)'
     arguments: '--output $(Build.ArtifactStagingDirectory)'
     displayName: 'Pack NuGet package'
 
