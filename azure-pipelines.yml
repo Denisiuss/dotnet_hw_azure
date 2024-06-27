@@ -57,6 +57,7 @@ steps:
     command: 'pack'
     packagesToPack: '**/*.csproj'
     versioningScheme: 'off'
+    buildProperties: 'PackageIdPrefix=$(Build.SourceBranch)_$(majorVersion).$(minorVersion).$(patchVersion)-$(Build.BuildId)'
     arguments: '--output $(Build.ArtifactStagingDirectory)'
     displayName: 'Pack NuGet package'
 
