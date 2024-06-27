@@ -30,6 +30,19 @@ steps:
     echo "##vso[task.setvariable variable=version;]$(majorVersion).$(minorVersion).$(patchVersion)-$(Build.BuildId)"
   displayName: 'Set Package Version'
 
+  - task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'SonarCloud'  # Service connection name
+    organization: 'denisiuss'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: 'Denisiuss_dotnet_hw_azure'
+    cliProjectName: 'Denisiuss_dotnet_hw_azure'
+    cliProjectVersion: '$(version)'
+    extraProperties: |
+      sonar.host.url=https://sonarcloud.io
+      sonar.login=1671e6aa333d6d7f404609e08a3d1fdac67d3646
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'

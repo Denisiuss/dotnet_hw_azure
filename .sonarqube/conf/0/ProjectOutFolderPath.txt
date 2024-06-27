@@ -1,0 +1,1 @@
+/home/denis/azure-devops/HelloWorld/.sonarqube/out/0

@@ -1,0 +1,3 @@
+﻿/home/denis/azure-devops/HelloWorld/Program.cs
+/home/denis/azure-devops/HelloWorld/.gitignore
+/home/denis/azure-devops/HelloWorld/azure-pipelines.yml
