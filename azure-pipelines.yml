@@ -5,7 +5,7 @@
 
 trigger:
 - main
-- features/*
+- features
 
 pool:
   name: default
