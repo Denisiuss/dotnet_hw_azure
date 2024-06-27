@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageIdPrefix></PackageIdPrefix>
-    <PackageId>$(PackageIdPrefix)-$(MSBuildProjectName)</PackageId>
+    <PackageId>$(PackageIdPrefix)</PackageId>
   </PropertyGroup>
 
 </Project>
