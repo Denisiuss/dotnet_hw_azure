@@ -27,7 +27,6 @@ inputs:
   projectKey: 'vasilevski12_devops_infinity'
   projectName: 'devops_infinity'
 
-steps:
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
