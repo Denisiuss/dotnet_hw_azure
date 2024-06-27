@@ -15,6 +15,19 @@ variables:
   patchVersion: $[counter(variables['majorVersion'].variables['minorVersion'].variables['patchVersion'], 1)]
 
 steps:
+- checkout: self
+  fetchDepth: 0
+
+- task: SonarCloudPrepare@2
+displayName: 'Prepare analysis configuration'
+inputs:
+  SonarCloud: 'Dev_inf'
+  organization: 'denis-vasilevsky'
+  scannerMode: 'MSBuild'
+  projectKey: 'vasilevski12_devops_infinity'
+  projectName: 'devops_infinity'
+
+steps:
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
@@ -30,23 +43,14 @@ steps:
     echo "##vso[task.setvariable variable=version;]$(majorVersion).$(minorVersion).$(patchVersion)-$(Build.BuildId)"
   displayName: 'Set Package Version'
 
-- task: SonarCloudPrepare@1
-  inputs:
-    SonarCloud: 'SonarCloud'  # Service connection name
-    organization: 'denisiuss'
-    scannerMode: 'CLI'
-    configMode: 'manual'
-    cliProjectKey: 'Denisiuss_dotnet_hw_azure'
-    cliProjectName: 'Denisiuss_dotnet_hw_azure'
-    cliProjectVersion: '$(version)'
-    extraProperties: |
-      sonar.host.url=https://sonarcloud.io
-      sonar.login=1671e6aa333d6d7f404609e08a3d1fdac67d3646
-
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
     projects: '**/*.csproj'
+
+- task: SonarCloudAnalyze@2
+  inputs:
+    jdkversion: 'JAVA_HOME_17_X64'
 
 - task: DotNetCoreCLI@2
   inputs:
