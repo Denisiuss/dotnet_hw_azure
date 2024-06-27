@@ -68,4 +68,4 @@ steps:
     nuGetFeedType: 'internal'
     publishVstsFeed: '4fc719f4-420b-46dd-80c4-4d013603cf3d/a3086c74-7606-43de-bee6-e7dc5fbf9cda'
     displayName: 'Push NuGet package to Artifacts'
-  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/features/'))
+  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'features'))
