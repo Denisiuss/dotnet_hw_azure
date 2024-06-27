@@ -6,7 +6,6 @@
 trigger:
 - main
 - features
-- dev
 
 pool:
   name: default
