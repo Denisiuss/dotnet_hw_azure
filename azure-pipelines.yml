@@ -5,8 +5,8 @@
 
 trigger:
 - main
-- features/*
-- dev/*
+- features
+- dev
 
 pool:
   name: default
